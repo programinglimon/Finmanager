@@ -157,11 +157,11 @@ router.post('/:id/transaction', async (req, res) => {
         }
 
         if (sessionProfit > 0) {
-            await new ProfitRecord({
-                source: 'ACCOUNT',
-                referenceId: account._id,
+            await new FinancialLog({
+                type: 'PROFIT',
                 amount: sessionProfit,
-                description: `${action} - ${numAmount}`
+                source: 'ACCOUNT',
+                description: `${account.name} (${account.type}) - ${action} Profit`
             }).save();
         }
 

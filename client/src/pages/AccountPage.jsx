@@ -76,14 +76,14 @@ const AccountPage = () => {
             <div style={{ padding: '16px', backgroundColor: '#f8f9fa', borderRadius: '12px' }}>
                 <p style={{ margin: '0 0 8px', fontSize: '14px', color: '#666' }}>Total Balance</p>
                 <h2 style={{ margin: 0, fontSize: '24px', fontWeight: '700', color: '#2c3e50' }}>
-                    ৳ {data.totalBalance.toLocaleString()}
+                    ৳ {data.totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h2>
             </div>
 
             <div style={{ padding: '16px', backgroundColor: '#e8f5e9', borderRadius: '12px' }}>
                 <p style={{ margin: '0 0 8px', fontSize: '14px', color: '#2e7d32' }}>Daily Profit</p>
                 <h3 style={{ margin: 0, fontSize: '20px', fontWeight: '700', color: '#1b5e20' }}>
-                    + ৳ {data.totalDailyProfit.toLocaleString()}
+                    + ৳ {data.totalDailyProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h3>
             </div>
         </div>

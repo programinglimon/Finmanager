@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ProfitRecord = require('../models/ProfitRecord');
+const FinancialLog = require('../models/FinancialLog');
 
 router.get('/report', async (req, res) => {
     try {
-        const { range } = req.query; // 'daily', 'weekly', 'monthly', 'yearly', 'custom'
-        // For simplicity, let's just return all records and let frontend filter, 
-        // OR implement basic aggregation here.
+        const { range } = req.query; // 'daily', 'weekly', 'monthly', 'yearly'
 
         let startDate = new Date();
         startDate.setHours(0, 0, 0, 0);
@@ -23,7 +21,8 @@ router.get('/report', async (req, res) => {
             startDate = new Date(0); // All time
         }
 
-        const records = await ProfitRecord.find({
+        const records = await FinancialLog.find({
+            type: 'PROFIT',
             date: { $gte: startDate }
         }).sort({ date: -1 });
 

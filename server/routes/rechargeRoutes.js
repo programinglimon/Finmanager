@@ -156,13 +156,21 @@ router.post('/inventory/:id/transaction', async (req, res) => {
                 const profit = soldQuantity * (item.sellPrice - item.buyPrice);
                 item.dailyProfit += profit;
 
-                // Log Profit Record
-                const ProfitRecord = require('../models/ProfitRecord');
-                await new ProfitRecord({
+                // Log Sales and Profit
+                const FinancialLog = require('../models/FinancialLog');
+
+                await new FinancialLog({
+                    type: 'SALE',
+                    amount: soldQuantity * item.sellPrice,
                     source: 'INVENTORY',
-                    referenceId: item._id,
+                    description: `Sold ${soldQuantity} x ${item.name}`
+                }).save();
+
+                await new FinancialLog({
+                    type: 'PROFIT',
                     amount: profit,
-                    description: `Sold ${soldQuantity} units of ${item.name}`
+                    source: 'INVENTORY',
+                    description: `Profit from ${item.name}`
                 }).save();
             }
             item.quantity = updatedQuantity;

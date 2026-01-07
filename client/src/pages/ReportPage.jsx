@@ -5,9 +5,7 @@ import API_URL from '../config';
 
 const ReportPage = () => {
     const navigate = useNavigate();
-    const [reportData, setReportData] = useState({
-        daily: {}, weekly: {}, monthly: {}, yearly: {}
-    });
+    const [reportData, setReportData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,13 +23,13 @@ const ReportPage = () => {
         fetchReport();
     }, []);
 
-    if (!data) return <div style={{ padding: '20px' }}>Loading Reports...</div>;
+    if (!reportData) return <div style={{ padding: '20px' }}>Loading Reports...</div>;
 
     const sections = [
-        { title: 'Today', data: data.daily, color: '#2196F3' },
-        { title: 'Last 7 Days', data: data.weekly, color: '#FF9800' },
-        { title: 'This Month', data: data.monthly, color: '#4CAF50' },
-        { title: 'This Year', data: data.yearly, color: '#9C27B0' },
+        { title: 'Today', data: reportData.daily, color: '#2196F3' },
+        { title: 'Last 7 Days', data: reportData.weekly, color: '#FF9800' },
+        { title: 'This Month', data: reportData.monthly, color: '#4CAF50' },
+        { title: 'This Year', data: reportData.yearly, color: '#9C27B0' },
     ];
 
     return (
@@ -57,25 +55,25 @@ const ReportPage = () => {
                             {/* Sales */}
                             <div style={{ backgroundColor: '#E3F2FD', padding: '12px', borderRadius: '8px' }}>
                                 <div style={{ fontSize: '12px', color: '#1565C0', marginBottom: '4px' }}>Sales</div>
-                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1565C0' }}>৳ {section.data.totalSales.toLocaleString()}</div>
+                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1565C0' }}>৳ {section.data.totalSales.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                             </div>
 
                             {/* Profit */}
                             <div style={{ backgroundColor: '#E8F5E9', padding: '12px', borderRadius: '8px' }}>
                                 <div style={{ fontSize: '12px', color: '#2E7D32', marginBottom: '4px' }}>Profit</div>
-                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#2E7D32' }}>৳ {section.data.totalProfit.toLocaleString()}</div>
+                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#2E7D32' }}>৳ {section.data.totalProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                             </div>
 
                             {/* Due Given */}
                             <div style={{ backgroundColor: '#FFEBEE', padding: '12px', borderRadius: '8px' }}>
                                 <div style={{ fontSize: '12px', color: '#C62828', marginBottom: '4px' }}>Due Given</div>
-                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#C62828' }}>৳ {section.data.totalDueGiven.toLocaleString()}</div>
+                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#C62828' }}>৳ {section.data.totalDueGiven.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                             </div>
 
                             {/* Deposit Received */}
                             <div style={{ backgroundColor: '#FFF3E0', padding: '12px', borderRadius: '8px' }}>
                                 <div style={{ fontSize: '12px', color: '#EF6C00', marginBottom: '4px' }}>Collected</div>
-                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#EF6C00' }}>৳ {section.data.totalDepositReceived.toLocaleString()}</div>
+                                <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#EF6C00' }}>৳ {section.data.totalDepositReceived.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                             </div>
                         </div>
                     </div>

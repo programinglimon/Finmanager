@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaPlus, FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
+import API_URL from '../config';
 
 const AccountDetailsPage = () => {
     const { type } = useParams();
@@ -158,7 +159,7 @@ const AccountDetailsPage = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this account?')) return;
         try {
-            await fetch(`http://localhost:5000/api/accounts/${id}`, { method: 'DELETE' });
+            await fetch(`${API_URL}/api/accounts/${id}`, { method: 'DELETE' });
             fetchAccounts();
         } catch (error) {
             console.error('Error deleting account:', error);
@@ -197,7 +198,7 @@ const AccountDetailsPage = () => {
                 </button>
                 <div>
                     <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a1a1a' }}>{type} Accounts</h1>
-                    <p style={{ margin: '4px 0 0', color: '#666', fontSize: '14px' }}>Total: ৳ {totalBalance.toLocaleString()}</p>
+                    <p style={{ margin: '4px 0 0', color: '#666', fontSize: '14px' }}>Total: ৳ {totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
             </div>
 
@@ -249,7 +250,7 @@ const AccountDetailsPage = () => {
                                     <span style={{ fontSize: '12px', color: '#888' }}>({account.number})</span>
                                 </div>
                                 <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#2c3e50' }}>
-                                    ৳ {account.balance.toLocaleString()}
+                                    ৳ {account.balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                 </div>
                                 {account.commission > 0 && (
                                     <div style={{ fontSize: '12px', color: '#4CAF50', marginTop: '2px' }}>

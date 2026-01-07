@@ -31,3 +31,11 @@ yarn-error.log*
 # Brain
 .agent
 brain
+
+# Debug Scripts
+debug_*.js
+seed_*.js
+test_*.js
+server/debug_*.js
+server/seed_*.js
+server/test_*.js

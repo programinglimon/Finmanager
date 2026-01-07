@@ -112,7 +112,7 @@ const CashPage = () => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
             }}>
                 <div style={{ fontSize: '16px', opacity: 0.9, marginBottom: '8px' }}>Current Cash in Hand</div>
-                <div style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '16px' }}>৳ {cashAccount?.balance.toLocaleString()}</div>
+                <div style={{ fontSize: '40px', fontWeight: 'bold', marginBottom: '16px' }}>৳ {cashAccount?.balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
 
                 <button
                     onClick={() => { setTransType('UPDATE'); setShowModal(true); setAmount(cashAccount?.balance); }}
@@ -172,7 +172,7 @@ const CashPage = () => {
                 {/* Total Expense Summary */}
                 <div style={{ backgroundColor: '#FFEBEE', padding: '16px', borderRadius: '12px', marginBottom: '16px', borderLeft: '4px solid #D32F2F' }}>
                     <div style={{ fontSize: '14px', color: '#D32F2F' }}>Total Expense ({filters.find(f => f.value === range)?.label})</div>
-                    <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#D32F2F' }}>৳ {expenseData.total.toLocaleString()}</div>
+                    <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#D32F2F' }}>৳ {expenseData.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                 </div>
 
                 {/* Expense List */}
@@ -186,7 +186,7 @@ const CashPage = () => {
                                     <div style={{ fontWeight: 'bold', color: '#333' }}>{item.description || 'Expense'}</div>
                                     <div style={{ fontSize: '12px', color: '#888', marginTop: '4px' }}>{new Date(item.date).toLocaleDateString()}</div>
                                 </div>
-                                <div style={{ fontWeight: 'bold', color: '#F44336' }}>- ৳ {item.amount.toLocaleString()}</div>
+                                <div style={{ fontWeight: 'bold', color: '#F44336' }}>- ৳ {item.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                             </div>
                         ))
                     )}

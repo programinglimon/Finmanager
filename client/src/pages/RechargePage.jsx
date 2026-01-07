@@ -169,7 +169,7 @@ const RechargePage = () => {
                     <>
                         <div style={{ backgroundColor: '#2196F3', color: 'white', padding: '20px', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 12px rgba(33, 150, 243, 0.3)' }}>
                             <div style={{ fontSize: '14px', opacity: 0.9, marginBottom: '4px' }}>Total Balance</div>
-                            <div style={{ fontSize: '32px', fontWeight: 'bold' }}>৳ {sims.reduce((sum, sim) => sum + (sim.balance || 0), 0).toLocaleString()}</div>
+                            <div style={{ fontSize: '32px', fontWeight: 'bold' }}>৳ {sims.reduce((sum, sim) => sum + (sim.balance || 0), 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                         </div>
                         {sims.map(sim => (
                             <div key={sim._id} style={{ backgroundColor: 'white', padding: '16px', borderRadius: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
@@ -182,8 +182,8 @@ const RechargePage = () => {
                                         </div>
                                     </div>
                                     <div style={{ textAlign: 'right' }}>
-                                        <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#2c3e50' }}>৳ {sim.balance}</div>
-                                        <div style={{ fontSize: '12px', color: '#4CAF50' }}>Profit: {sim.dailyProfit ? sim.dailyProfit.toFixed(2) : 0}</div>
+                                        <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#2c3e50' }}>৳ {Number(sim.balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                                        <div style={{ fontSize: '12px', color: '#4CAF50' }}>Profit: {Number(sim.dailyProfit || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                                         {sim.commission > 0 && <div style={{ fontSize: '12px', color: '#666' }}>Comm: {sim.commission}/k</div>}
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@ const RechargePage = () => {
                                     </div>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontSize: '14px', color: '#4CAF50', fontWeight: 'bold' }}>Profit: {item.dailyProfit ? item.dailyProfit.toFixed(2) : 0}</div>
+                                    <div style={{ fontSize: '14px', color: '#4CAF50', fontWeight: 'bold' }}>Profit: {Number(item.dailyProfit || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid #eee', paddingTop: '12px' }}>

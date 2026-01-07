@@ -5,7 +5,7 @@ import API_URL from '../config';
 
 const ProfitPage = () => {
     const navigate = useNavigate();
-    const [profitData, setProfitData] = useState({ total: 0, breakdown: [] });
+    const [profitData, setProfitData] = useState(null);
     const [range, setRange] = useState('daily');
     const [loading, setLoading] = useState(true);
 
@@ -29,6 +29,8 @@ const ProfitPage = () => {
         { label: 'Yearly', value: 'yearly' },
         { label: 'All', value: 'all' },
     ];
+
+    if (loading || !profitData) return <div style={{ padding: '20px' }}>Loading Profit Data...</div>;
 
     return (
         <div style={{ maxWidth: '480px', margin: '0 auto', minHeight: '100vh', backgroundColor: '#fafafa', padding: '20px' }}>
@@ -63,29 +65,29 @@ const ProfitPage = () => {
             {/* Total Profit Card */}
             <div style={{ backgroundColor: '#2196F3', color: 'white', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 12px rgba(33, 150, 243, 0.3)' }}>
                 <div style={{ fontSize: '14px', opacity: 0.9, marginBottom: '8px' }}>Total Profit ({range})</div>
-                <div style={{ fontSize: '36px', fontWeight: 'bold' }}>৳ {data.total.toLocaleString()}</div>
+                <div style={{ fontSize: '36px', fontWeight: 'bold' }}>৳ {profitData.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
             </div>
 
             {/* Breakdown */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '24px' }}>
                 <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
                     <div style={{ fontSize: '12px', color: '#666' }}>SIM</div>
-                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#FF9800' }}>{data.sim}</div>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#FF9800' }}>{profitData.sim}</div>
                 </div>
                 <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
                     <div style={{ fontSize: '12px', color: '#666' }}>Inventory</div>
-                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#4CAF50' }}>{data.inventory}</div>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#4CAF50' }}>{profitData.inventory}</div>
                 </div>
                 <div style={{ backgroundColor: 'white', padding: '16px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
                     <div style={{ fontSize: '12px', color: '#666' }}>Account</div>
-                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#9C27B0' }}>{data.account}</div>
+                    <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#9C27B0' }}>{profitData.account}</div>
                 </div>
             </div>
 
             {/* History List */}
             <h3 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '16px', color: '#333' }}>History</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {data.history.map(item => (
+                {profitData.history.map(item => (
                     <div key={item._id} style={{ backgroundColor: 'white', padding: '16px', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center' }}>
                         <div style={{
                             width: '40px', height: '40px', borderRadius: '10px',

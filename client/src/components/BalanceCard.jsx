@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaWallet } from 'react-icons/fa';
 
 import API_URL from '../config';
@@ -36,7 +36,7 @@ const BalanceCard = () => {
                     <span style={{ fontSize: '14px', fontWeight: '500' }}>Business Total Balance</span>
                 </div>
                 <h2 style={{ fontSize: '32px', fontWeight: '700', margin: 0 }}>
-                    {loading ? '...' : `৳ ${balance.toLocaleString()}`}
+                    {loading ? '...' : `৳ ${balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                 </h2>
                 <div style={{ marginTop: '12px', fontSize: '12px', opacity: 0.7 }}>
                     <span>Updated just now</span>
